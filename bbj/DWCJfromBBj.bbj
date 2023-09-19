@@ -1,0 +1,28 @@
+
+use org.dwcj.bridge.BBjWindowAdapter
+use org.dwcj.Environment
+use org.dwcj.addons.markdown.Markdown
+
+api! = BBjAPI()
+sysgui! = api!.openSysGui("X0")
+wnd! = sysgui!.addWindow (" Markdown Demo ", $01111083$ )
+wnd!.setStyle ("padding","30 px")
+wnd!.setStyle ("margin-left","40 vw")
+wnd!.setPanelStyle ("display","inline-grid")
+
+
+rem instantiate DWCJ environment
+h! = new ::DWCJ/DwcjHelper.bbj::DwcjHelper()
+Environment.init( BBjAPI() , h!)
+
+rem use BBjPanelAdapter to access the window with DWCJ
+wa! = new BBjWindowAdapter (wnd!)
+
+m!= new Markdown()
+wa!.add(m!)
+m!.setText("# Hello"+$0a0a$+
+: "This is Markdown"+$0a0a$+
+: "**Isn't that cool, ey?** ")
+
+process_events
+
